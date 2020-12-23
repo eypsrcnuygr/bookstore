@@ -1,10 +1,13 @@
 const initialState = {
-  category: 'Sci_Fi',
-  name: 'The Devils of the Paradise',
-  author: 'Carl Sagan',
-  page: 230,
-  datePublished: 1980,
-  read: true,
+  bookObj: {
+    category: 'Sci_Fi',
+    title: 'The Devils of the Paradise',
+    author: 'Carl Sagan',
+    page: 230,
+    datePublished: 1980,
+    read: true,
+    BookID: 1,
+  },
 };
 
 const booksReducer = (state = initialState, action) => {
