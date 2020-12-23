@@ -1,11 +1,9 @@
 import React from 'react';
 
-const book = bookObj => {
+const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
-  } = bookObj.bookObj;
-
-  console.log(bookObj);
+  } = props.bookObj;
   return (
     <>
       <table>
@@ -28,7 +26,7 @@ const book = bookObj => {
             <td>{author}</td>
             <td>{page}</td>
             <td>{datePublished}</td>
-            <td>{read}</td>
+            <td>{read ? 'yes' : 'no'}</td>
           </tr>
         </tbody>
       </table>

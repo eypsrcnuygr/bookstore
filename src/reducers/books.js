@@ -13,7 +13,7 @@ const initialState = {
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'toggleRead':
-      return { ...state, read: !state.read };
+      return { ...state, read: !state.bookObj.read };
     default:
       return state;
   }
