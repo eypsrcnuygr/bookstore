@@ -4,29 +4,73 @@ const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
   } = props.bookObj;
+  let i = 0;
   return (
     <>
       <table>
-        <thead>
-          <tr>
-            <th>Book ID</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Page</th>
-            <th>Date Published</th>
-            <th>Read</th>
-          </tr>
-        </thead>
         <tbody>
           <tr>
-            <td>{BookID}</td>
-            <td>{title}</td>
-            <td>{category}</td>
-            <td>{author}</td>
-            <td>{page}</td>
-            <td>{datePublished}</td>
-            <td>{read ? 'yes' : 'no'}</td>
+            <th>Book ID</th>
+            {BookID.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Title</th>
+            {title.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Category</th>
+            {category.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Author</th>
+            {author.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Page</th>
+            {page.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Date Published</th>
+            {datePublished.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element}</td>
+              );
+            })}
+          </tr>
+          <tr>
+            <th>Read</th>
+            {read.map(element => {
+              i += 1;
+              return (
+                <td key={i}>{element ? 'Yes' : 'No' }</td>
+              );
+            })}
           </tr>
         </tbody>
       </table>
