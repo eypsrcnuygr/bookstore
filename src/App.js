@@ -1,4 +1,4 @@
-import BookList from './components/booksList';
+import BookList from './containers/booksList';
 import BooksForm from './containers/BooksForm';
 
 function App() {
