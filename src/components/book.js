@@ -1,9 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  const {
+    category, title, author, page, datePublished, read, BookID,
+  } = state.booksReducer.bookObj;
+  return {
+    category, title, author, page, datePublished, read, BookID,
+  };
+};
 
 const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
-  } = props.bookObj;
+  } = props;
+
   let i = 0;
   return (
     <>
@@ -78,4 +89,4 @@ const book = props => {
   );
 };
 
-export default book;
+export default connect(mapStateToProps, null)(book);
