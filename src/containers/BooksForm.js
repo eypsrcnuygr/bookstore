@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
@@ -7,14 +8,14 @@ import { createBook } from '../actions';
 function mapStateToProps(state) {
   const {
     category, title, author, page, datePublished, read, BookID,
-  } = state.booksReducer.bookObj;
+  } = state.booksReducer;
   return {
     category, title, author, page, datePublished, read, BookID,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  createBook: () => dispatch({ type: 'CREATE_BOOK' }),
+  create: obj => dispatch(createBook(obj)),
 });
 
 class BooksForm extends Component {
@@ -27,7 +28,7 @@ class BooksForm extends Component {
       page: null,
       datePublished: null,
       read: false,
-      id: null,
+      BookID: props.BookID[props.BookID.length - 1],
     };
     this.handleChangeForTitle = this.handleChangeForTitle.bind(this);
     this.handleChangeForCategory = this.handleChangeForCategory.bind(this);
@@ -35,6 +36,7 @@ class BooksForm extends Component {
     this.handleChangeForDatePublished = this.handleChangeForDatePublished.bind(this);
     this.handleChangeForPage = this.handleChangeForPage.bind(this);
     this.handleChangeForRead = this.handleChangeForRead.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChangeForTitle(e) {
@@ -68,19 +70,27 @@ class BooksForm extends Component {
   }
 
   handleChangeForRead(e) {
-    this.setState({
-      read: e.target.value,
-    });
+    if (e.target.checked) {
+      this.setState({
+        read: true,
+      });
+    } else {
+      this.setState({
+        read: false,
+      });
+    }
+  }
+
+  handleClick() {
+    this.setState(state => ({ BookID: state.BookID + 1 }), () => this.props.create(this.state));
   }
 
   render() {
     const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
     const option = [];
-    const bookObj = this.state;
     for (let i = 0; i < 7; i += 1) {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
     }
-    console.log(bookObj);
     return (
       <form>
         <input type="text" onChange={this.handleChangeForTitle} />
@@ -91,7 +101,7 @@ class BooksForm extends Component {
         <input type="number" onChange={this.handleChangeForPage} />
         <input type="date" onChange={this.handleChangeForDatePublished} />
         <input type="checkbox" onClick={this.handleChangeForRead} />
-        <input type="button" onClick={() => createBook(bookObj)} value="Yapıştır" />
+        <input type="button" onClick={this.handleClick} value="Yapıştır" />
       </form>
     );
   }

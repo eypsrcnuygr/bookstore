@@ -1,13 +1,11 @@
 const initialState = {
-  bookObj: {
-    category: ['Sci_Fi', 'History'],
-    title: ['The Devils of the Paradise', 'The History of Civilization'],
-    author: ['Carl Sagan', 'Will Durant'],
-    page: [380, 520],
-    datePublished: [1980, 1981],
-    read: [true, false],
-    BookID: [1, 2],
-  },
+  category: ['Sci_Fi', 'History'],
+  title: ['The Devils of the Paradise', 'The History of Civilization'],
+  author: ['Carl Sagan', 'Will Durant'],
+  page: [380, 520],
+  datePublished: [1980, 1981],
+  read: [true, false],
+  BookID: [1, 2],
 };
 
 const booksReducer = (state = initialState, action) => {
@@ -22,13 +20,13 @@ const booksReducer = (state = initialState, action) => {
       const { BookID } = action.payload;
       return {
         ...state,
-        category: { ...state.category, category },
-        title: { ...state.title, title },
-        author: { ...state.author, author },
-        page: { ...state.page, page },
-        datePublished: { ...state.datePublished, datePublished },
-        read: { ...state.read, read },
-        BookID: { ...state.BookID, BookID },
+        category: [...state.category, category],
+        title: [...state.title, title],
+        author: [...state.author, author],
+        page: [...state.page, page],
+        datePublished: [...state.datePublished, datePublished],
+        read: [...state.read, read],
+        BookID: [...state.BookID, BookID],
       };
     }
     case 'REMOVE_BOOK': {

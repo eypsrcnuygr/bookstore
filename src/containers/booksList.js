@@ -5,7 +5,7 @@ import Book from '../components/book';
 const mapStateToProps = state => {
   const {
     category, title, author, page, datePublished, read, BookID,
-  } = state.booksReducer.bookObj;
+  } = state.booksReducer;
   return {
     category, title, author, page, datePublished, read, BookID,
   };
