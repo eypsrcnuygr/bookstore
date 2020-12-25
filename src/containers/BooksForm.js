@@ -22,11 +22,11 @@ class BooksForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: null,
-      title: null,
-      author: null,
-      page: null,
-      datePublished: null,
+      category: 'Action',
+      title: '',
+      author: '',
+      page: '',
+      datePublished: '',
       read: false,
       BookID: props.BookID[props.BookID.length - 1],
     };
@@ -37,6 +37,7 @@ class BooksForm extends Component {
     this.handleChangeForPage = this.handleChangeForPage.bind(this);
     this.handleChangeForRead = this.handleChangeForRead.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   handleChangeForTitle(e) {
@@ -82,7 +83,22 @@ class BooksForm extends Component {
   }
 
   handleClick() {
-    this.setState(state => ({ BookID: state.BookID + 1 }), () => this.props.create(this.state));
+    this.setState(state => ({ BookID: state.BookID + 1 }),
+      async () => {
+        await this.props.create(this.state);
+        this.reset();
+      });
+  }
+
+  reset() {
+    this.setState({
+      title: '',
+      author: '',
+      page: '',
+      datePublished: '',
+      category: 'Action',
+      BookID: this.props.BookID[this.props.BookID.length - 1],
+    });
   }
 
   render() {
@@ -93,14 +109,14 @@ class BooksForm extends Component {
     }
     return (
       <form>
-        <input type="text" onChange={this.handleChangeForTitle} />
+        <input type="text" onChange={this.handleChangeForTitle} value={this.state.title} />
         <select name="categories" id="categories" onChange={this.handleChangeForCategory}>
           {option}
         </select>
-        <input type="text" onChange={this.handleChangeForAuthor} />
-        <input type="number" onChange={this.handleChangeForPage} />
-        <input type="date" onChange={this.handleChangeForDatePublished} />
-        <input type="checkbox" onClick={this.handleChangeForRead} />
+        <input type="text" onChange={this.handleChangeForAuthor} value={this.state.author} />
+        <input type="number" onChange={this.handleChangeForPage} value={this.state.page} />
+        <input type="date" onChange={this.handleChangeForDatePublished} value={this.state.datePublished} />
+        <input type="checkbox" onClick={this.handleChangeForRead} value={this.state.read} />
         <input type="button" onClick={this.handleClick} value="Yapıştır" />
       </form>
     );
