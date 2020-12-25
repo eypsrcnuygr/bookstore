@@ -13,11 +13,22 @@ const initialState = {
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_BOOK': {
-      const { id, bookObj } = action.payload;
+      const { category } = action.payload;
+      const { title } = action.payload;
+      const { author } = action.payload;
+      const { page } = action.payload;
+      const { datePublished } = action.payload;
+      const { read } = action.payload;
+      const { BookID } = action.payload;
       return {
         ...state,
-        BookID: state.BookID + id,
-        state: bookObj,
+        category: { ...state.category, category },
+        title: { ...state.title, title },
+        author: { ...state.author, author },
+        page: { ...state.page, page },
+        datePublished: { ...state.datePublished, datePublished },
+        read: { ...state.read, read },
+        BookID: { ...state.BookID, BookID },
       };
     }
     case 'REMOVE_BOOK': {

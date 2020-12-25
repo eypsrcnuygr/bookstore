@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { createBook } from '../actions';
 
 function mapStateToProps(state) {
   const {
@@ -10,6 +12,10 @@ function mapStateToProps(state) {
     category, title, author, page, datePublished, read, BookID,
   };
 }
+
+const mapDispatchToProps = dispatch => ({
+  createBook: () => dispatch({ type: 'CREATE_BOOK' }),
+});
 
 class BooksForm extends Component {
   constructor(props) {
@@ -29,14 +35,6 @@ class BooksForm extends Component {
     this.handleChangeForDatePublished = this.handleChangeForDatePublished.bind(this);
     this.handleChangeForPage = this.handleChangeForPage.bind(this);
     this.handleChangeForRead = this.handleChangeForRead.bind(this);
-  }
-
-  handleSubmit(bookObj, id = 3, e) {
-    e.preventDefault();
-    this.setState({
-      state: bookObj,
-      id: { ...id, id },
-    });
   }
 
   handleChangeForTitle(e) {
@@ -82,7 +80,7 @@ class BooksForm extends Component {
     for (let i = 0; i < 7; i += 1) {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
     }
-    console.log(this.state);
+    console.log(bookObj);
     return (
       <form>
         <input type="text" onChange={this.handleChangeForTitle} />
@@ -93,10 +91,10 @@ class BooksForm extends Component {
         <input type="number" onChange={this.handleChangeForPage} />
         <input type="date" onChange={this.handleChangeForDatePublished} />
         <input type="checkbox" onClick={this.handleChangeForRead} />
-        <input type="submit" onClick={() => this.handleSubmit(bookObj)} />
+        <input type="button" onClick={() => createBook(bookObj)} value="Yapıştır" />
       </form>
     );
   }
 }
 
-export default connect(mapStateToProps, null)(BooksForm);
+export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);
