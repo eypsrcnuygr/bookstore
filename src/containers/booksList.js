@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import Book from '../components/book';
 
 const mapStateToProps = state => {
-  const {
-    category, title, author, page, datePublished, read, BookID,
-  } = state.booksReducer;
+  const bookObj = state.booksReducer;
+  console.log(bookObj);
   return {
-    category, title, author, page, datePublished, read, BookID,
+    bookObj,
   };
 };
 

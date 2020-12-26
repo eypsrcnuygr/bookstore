@@ -1,14 +1,16 @@
+/* eslint-disable max-len */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createBook } from '../actions';
 
 function mapStateToProps(state) {
-  const {
-    category, title, author, page, datePublished, read, BookID,
-  } = state.booksReducer;
+  const bookObjForForm = state.booksReducer;
+  console.log(bookObjForForm);
   return {
-    category, title, author, page, datePublished, read, BookID,
+    bookObjForForm,
   };
 }
 
@@ -26,8 +28,9 @@ class BooksForm extends Component {
       page: '',
       datePublished: '',
       read: false,
-      BookID: props.BookID[props.BookID.length - 1],
+      BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
     };
+    console.log(props.bookObjForForm.bookObj);
     this.handleChangeForTitle = this.handleChangeForTitle.bind(this);
     this.handleChangeForCategory = this.handleChangeForCategory.bind(this);
     this.handleChangeForAuthor = this.handleChangeForAuthor.bind(this);
@@ -114,16 +117,15 @@ class BooksForm extends Component {
   }
 
   reset() {
-    const { BookID } = this.props;
-    this.setState({
+    console.log(this.props.bookObjForForm);
+    this.setState(state => ({
       title: '',
       author: '',
       page: '',
       datePublished: '',
       category: 'Action',
-      BookID: BookID[BookID.length - 1],
-      read: '',
-    });
+      read: state.read,
+    }));
   }
 
   render() {
