@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import '../App.css';
 
 const book = props => {
   const {
@@ -31,47 +32,55 @@ const book = props => {
     c += 7;
   }
   return (
-    <table>
-      <thead>
-        <tr>
-          <td>BookID</td>
-          <td>Title</td>
-          <td>Category</td>
-          <td>Author</td>
-          <td>Page</td>
-          <td>Date Published</td>
-          <td>Read</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          {newArr1.map(element => {
-            b += 1;
-            return (
-              <td key={b}>{element}</td>
-            );
-          })}
-        </tr>
-        <tr>
-          {newArr2.map(element => {
-            b += 1;
-            return (
-              <td key={b}>{element}</td>
-            );
-          })}
-        </tr>
-        {newVariable.length !== 0 ? newVariable.map(element => (
-          <tr key={b}>
-            {element.map(realElement => {
+    <div className="table-container">
+      <table>
+        <thead>
+          <tr>
+            <td>BookID</td>
+            <td>Title</td>
+            <td>Category</td>
+            <td>Author</td>
+            <td>Page</td>
+            <td>Date Published</td>
+            <td>Read</td>
+            <td>Remove</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {newArr1.map(element => {
               b += 1;
               return (
-                <td key={b}>{realElement}</td>
+                <td key={b}>{element}</td>
               );
             })}
+            <td><button type="button">Remove</button></td>
           </tr>
-        )) : null}
-      </tbody>
-    </table>
+          <tr>
+            {newArr2.map(element => {
+              b += 1;
+              return (
+                <td key={b}>{element}</td>
+              );
+            })}
+            <td><button type="button">Remove</button></td>
+          </tr>
+          {newVariable.length !== 0 ? newVariable.map(element => (
+            <tr key={b}>
+              {element.map(realElement => {
+                b += 1;
+                return (
+                  <td key={b}>{realElement}</td>
+                );
+              })}
+              <td><button type="button">Remove</button></td>
+            </tr>
+          )) : null}
+        </tbody>
+      </table>
+
+    </div>
+
   );
 };
 
