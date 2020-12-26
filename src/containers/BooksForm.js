@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,7 +5,7 @@ import { createBook } from '../actions';
 
 function mapStateToProps(state) {
   const bookObjForForm = state.booksReducer;
-  console.log(bookObjForForm);
+
   return {
     bookObjForForm,
   };
@@ -30,7 +27,7 @@ class BooksForm extends Component {
       read: false,
       BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
     };
-    console.log(props.bookObjForForm.bookObj);
+
     this.handleChangeForTitle = this.handleChangeForTitle.bind(this);
     this.handleChangeForCategory = this.handleChangeForCategory.bind(this);
     this.handleChangeForAuthor = this.handleChangeForAuthor.bind(this);
@@ -117,7 +114,6 @@ class BooksForm extends Component {
   }
 
   reset() {
-    console.log(this.props.bookObjForForm);
     this.setState(state => ({
       title: '',
       author: '',
@@ -154,7 +150,7 @@ class BooksForm extends Component {
 }
 
 BooksForm.propTypes = {
-  BookID: PropTypes.instanceOf(Array),
+  bookObjForForm: PropTypes.instanceOf(Array),
 };
 
 BooksForm.propTypes = {
@@ -162,7 +158,7 @@ BooksForm.propTypes = {
 };
 
 BooksForm.defaultProps = {
-  BookID: [],
+  bookObjForForm: [],
 };
 
 BooksForm.defaultProps = {

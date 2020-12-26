@@ -1,6 +1,3 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 const initialState = {
   bookObj: [
     {
@@ -27,24 +24,21 @@ const initialState = {
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_BOOK': {
-      // const bookObj = action.payload;
-      // console.log(bookObj);
       const { bookObj } = state;
       bookObj.push(action.payload);
-      console.log(bookObj);
+
       return {
         bookObj,
       };
     }
     case 'REMOVE_BOOK': {
-      const {
-        bookObj,
-      } = action.payload;
-      console.log(bookObj);
-      console.log(state);
+      const bookObjRemoved = action.payload;
+      const bookObj = { ...state }.bookObj
+        .filter(element => element.BookID !== bookObjRemoved.BookID);
+
       return {
-        ...state,
-      }.filter(element => element !== bookObj);
+        bookObj,
+      };
     }
     default:
       return state;

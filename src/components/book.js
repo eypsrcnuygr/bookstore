@@ -9,8 +9,11 @@ const mapDispatchToProps = dispatch => ({
 
 const book = props => {
   const bookObjForBook = props.bookObj.bookObj.bookObj;
-  console.log(bookObjForBook);
   let i = 0;
+  const handleClick = obj => {
+    props.remove(obj);
+  };
+
   return (
     <>
       <table>
@@ -37,6 +40,7 @@ const book = props => {
                 }
                 return <td key={i}>{value}</td>;
               })}
+              <td><button onClick={() => handleClick(book)} type="button">Remove</button></td>
             </tr>
           ))}
         </tbody>
