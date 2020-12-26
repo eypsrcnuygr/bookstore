@@ -1,6 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
+import { connect } from 'react-redux';
+import { removeBook } from '../actions';
 import '../App.css';
+
+const mapDispatchToProps = dispatch => ({
+  remove: (obj, id) => dispatch(removeBook(obj, id)),
+});
 
 const book = props => {
   const {
@@ -31,6 +36,10 @@ const book = props => {
     newVariable.push(bookArr.slice(c, c + 7));
     c += 7;
   }
+  const handleClick = bookObj => {
+    props.remove(bookObj);
+  };
+
   return (
     <div className="table-container">
       <table>
@@ -54,7 +63,7 @@ const book = props => {
                 <td key={b}>{element}</td>
               );
             })}
-            <td><button type="button">Remove</button></td>
+            <td><button type="button" onClick={() => handleClick(newArr1)}>Remove</button></td>
           </tr>
           <tr>
             {newArr2.map(element => {
@@ -63,7 +72,7 @@ const book = props => {
                 <td key={b}>{element}</td>
               );
             })}
-            <td><button type="button">Remove</button></td>
+            <td><button type="button" onClick={() => handleClick(newArr2)}>Remove</button></td>
           </tr>
           {newVariable.length !== 0 ? newVariable.map(element => (
             <tr key={b}>
@@ -73,7 +82,7 @@ const book = props => {
                   <td key={b}>{realElement}</td>
                 );
               })}
-              <td><button type="button">Remove</button></td>
+              <td><button type="button" onClick={() => handleClick(element)}>Remove</button></td>
             </tr>
           )) : null}
         </tbody>
@@ -84,4 +93,4 @@ const book = props => {
   );
 };
 
-export default book;
+export default connect(null, mapDispatchToProps)(book);

@@ -11,10 +11,15 @@ export const createBook = bookObj => ({
   },
 });
 
-export const removeBook = (bookObj, selectedId) => ({
+export const removeBook = bookObj => ({
   type: 'REMOVE_BOOK',
   payload: {
-    id: selectedId,
-    bookObj,
+    id: bookObj[0],
+    title: bookObj[1],
+    author: bookObj[3],
+    page: bookObj[4],
+    category: bookObj[2],
+    datePublished: bookObj[5],
+    read: bookObj[6],
   },
 });

@@ -30,12 +30,19 @@ const booksReducer = (state = initialState, action) => {
       };
     }
     case 'REMOVE_BOOK': {
-      const { id, bookObj } = action.payload;
-      const indexOfId = bookObj.BookID.indexOf(id);
+      const {
+        id, title, author, category, page, datePublished, read,
+      } = action.payload;
+      const removeKey = (element, array) => array.filter(ele => ele !== element);
       return {
         ...state,
-        BookID: state.BookID.splice(indexOfId, 1),
-        state: bookObj,
+        BookID: removeKey(id, state.BookID),
+        category: removeKey(category, state.category),
+        title: removeKey(title, state.title),
+        author: removeKey(author, state.author),
+        page: removeKey(page, state.page),
+        datePublished: removeKey(datePublished, state.datePublished),
+        read: removeKey(read, state.read),
       };
     }
     default:
