@@ -15,6 +15,7 @@ const book = props => {
   let i = 0;
   let b = 0;
   let c = 14;
+  console.log(props.bookObj);
   while (i < BookID.length) {
     bookArr.push(BookID[i]);
     bookArr.push(title[i]);
@@ -39,8 +40,6 @@ const book = props => {
   const handleClick = bookObj => {
     props.remove(bookObj);
   };
-
-  console.log(newVariable);
 
   return (
     <div className="table-container">

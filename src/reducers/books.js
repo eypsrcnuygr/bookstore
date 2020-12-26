@@ -1,3 +1,5 @@
+/* eslint-disable arrow-body-style */
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 const initialState = {
   category: ['Sci_Fi', 'History'],
@@ -35,19 +37,24 @@ const booksReducer = (state = initialState, action) => {
         id, title, author, category, page, datePublished, read,
       } = action.payload;
       const removeKey = (element, array, index) => array.filter(ele => {
-        console.log(`Element is ${element}, index is ${array.indexOf(element)}, given index is ${index}`);
+        // console.log(`Element is ${element}, index is ${array.indexOf(element)}, given index is ${index}`);
 
         return array.indexOf(ele) !== index;
       });
-      console.log(title);
+      // console.log(`my payload ${action.payload.id}`);
+      console.log(state);
+      const restElementsId = state.BookID.filter(element => element !== id);
+      console.log(id);
+      console.log(state.BookID);
       return {
-        BookID: removeKey(id, state.BookID, state.BookID.indexOf(id)),
-        category: removeKey(category, state.category, state.BookID.indexOf(id)),
-        title: removeKey(title, state.title, state.BookID.indexOf(id)),
-        author: removeKey(author, state.author, state.BookID.indexOf(id)),
-        page: removeKey(page, state.page, state.BookID.indexOf(id)),
-        datePublished: removeKey(datePublished, state.datePublished, state.BookID.indexOf(id)),
-        read: removeKey(read, state.read, state.BookID.indexOf(id)),
+        ...state,
+        category: [...state.category].filter(element => element !== category),
+        title: [...state.title].filter(element => element !== title),
+        author: [...state.author].filter(element => element !== author),
+        page: [...state.page].filter(element => element !== page),
+        datePublished: [...state.datePublished].filter(element => element !== datePublished),
+        read: [...state.read].filter(element => element !== read),
+        BookID: [...state.BookID].filter(element => element !== id),
       };
     }
     default:
