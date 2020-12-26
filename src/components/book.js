@@ -4,14 +4,13 @@ import { removeBook } from '../actions';
 import '../App.css';
 
 const mapDispatchToProps = dispatch => ({
-  remove: (obj, id) => dispatch(removeBook(obj, id)),
+  remove: obj => dispatch(removeBook(obj)),
 });
 
 const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
   } = props.bookObj;
-  console.log(BookID);
   const bookArr = [];
   let i = 0;
   let b = 0;
@@ -40,6 +39,8 @@ const book = props => {
   const handleClick = bookObj => {
     props.remove(bookObj);
   };
+
+  console.log(newVariable);
 
   return (
     <div className="table-container">

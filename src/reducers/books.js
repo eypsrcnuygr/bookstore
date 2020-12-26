@@ -39,16 +39,15 @@ const booksReducer = (state = initialState, action) => {
 
         return array.indexOf(ele) !== index;
       });
-      console.log(state.category.indexOf(category));
+      console.log(title);
       return {
-        ...state,
         BookID: removeKey(id, state.BookID, state.BookID.indexOf(id)),
-        category: removeKey(category, state.category, state.category.indexOf(category)),
-        title: removeKey(title, state.title, state.title.indexOf(title)),
-        author: removeKey(author, state.author, state.author.indexOf(author)),
-        page: removeKey(page, state.page, state.page.indexOf(page)),
-        datePublished: removeKey(datePublished, state.datePublished, state.datePublished.indexOf(datePublished)),
-        read: removeKey(read, state.read, state.read.indexOf(read)),
+        category: removeKey(category, state.category, state.BookID.indexOf(id)),
+        title: removeKey(title, state.title, state.BookID.indexOf(id)),
+        author: removeKey(author, state.author, state.BookID.indexOf(id)),
+        page: removeKey(page, state.page, state.BookID.indexOf(id)),
+        datePublished: removeKey(datePublished, state.datePublished, state.BookID.indexOf(id)),
+        read: removeKey(read, state.read, state.BookID.indexOf(id)),
       };
     }
     default:

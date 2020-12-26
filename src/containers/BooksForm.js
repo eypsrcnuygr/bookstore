@@ -39,9 +39,15 @@ class BooksForm extends Component {
   }
 
   handleChangeForTitle(e) {
-    this.setState({
-      title: e.target.value,
-    });
+    if (e.target.value === '') {
+      this.setState({
+        title: '',
+      });
+    } else {
+      this.setState({
+        title: e.target.value,
+      });
+    }
   }
 
   handleChangeForCategory(e) {
@@ -51,21 +57,39 @@ class BooksForm extends Component {
   }
 
   handleChangeForAuthor(e) {
-    this.setState({
-      author: e.target.value,
-    });
+    if (e.target.value === '') {
+      this.setState({
+        author: '',
+      });
+    } else {
+      this.setState({
+        author: e.target.value,
+      });
+    }
   }
 
   handleChangeForPage(e) {
-    this.setState({
-      page: e.target.value,
-    });
+    if (e.target.value === '') {
+      this.setState({
+        page: '',
+      });
+    } else {
+      this.setState({
+        page: e.target.value,
+      });
+    }
   }
 
   handleChangeForDatePublished(e) {
-    this.setState({
-      datePublished: e.target.value,
-    });
+    if (e.target.value === '') {
+      this.setState({
+        datePublished: '',
+      });
+    } else {
+      this.setState({
+        datePublished: e.target.value,
+      });
+    }
   }
 
   handleChangeForRead(e) {
@@ -98,6 +122,7 @@ class BooksForm extends Component {
       datePublished: '',
       category: 'Action',
       BookID: BookID[BookID.length - 1],
+      read: '',
     });
   }
 
@@ -105,7 +130,7 @@ class BooksForm extends Component {
     const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
     const option = [];
     const {
-      title, author, page, datePublished, read,
+      title, author, page, datePublished, read, category,
     } = this.state;
     for (let i = 0; i < 7; i += 1) {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
@@ -113,7 +138,7 @@ class BooksForm extends Component {
     return (
       <form>
         <input type="text" onChange={this.handleChangeForTitle} value={title} />
-        <select name="categories" id="categories" onChange={this.handleChangeForCategory}>
+        <select name="categories" value={category} id="categories" onChange={this.handleChangeForCategory}>
           {option}
         </select>
         <input type="text" onChange={this.handleChangeForAuthor} value={author} />
