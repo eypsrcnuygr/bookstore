@@ -1,80 +1,77 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 
 const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
   } = props.bookObj;
+  const bookArr = [];
   let i = 0;
+  let b = 0;
+  let c = 14;
+  while (i < BookID.length) {
+    bookArr.push(BookID[i]);
+    bookArr.push(title[i]);
+    bookArr.push(category[i]);
+    bookArr.push(author[i]);
+    bookArr.push(page[i]);
+    bookArr.push(datePublished[i]);
+    if (read[i]) {
+      bookArr.push('Yes');
+    } else {
+      bookArr.push('No');
+    }
+    i += 1;
+  }
+  const newArr1 = bookArr.slice(0, 7);
+  const newArr2 = bookArr.slice(7, 14);
+  const newVariable = [];
+  while (c < bookArr.length) {
+    newVariable.push(bookArr.slice(c, c + 7));
+    c += 7;
+  }
   return (
-    <>
-      <table>
-        <tbody>
-          <tr>
-            <th>Book ID</th>
-            {BookID.map(element => {
-              i += 1;
+    <table>
+      <thead>
+        <tr>
+          <td>BookID</td>
+          <td>Title</td>
+          <td>Category</td>
+          <td>Author</td>
+          <td>Page</td>
+          <td>Date Published</td>
+          <td>Read</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {newArr1.map(element => {
+            b += 1;
+            return (
+              <td key={b}>{element}</td>
+            );
+          })}
+        </tr>
+        <tr>
+          {newArr2.map(element => {
+            b += 1;
+            return (
+              <td key={b}>{element}</td>
+            );
+          })}
+        </tr>
+        {newVariable.length !== 0 ? newVariable.map(element => (
+          <tr key={b}>
+            {element.map(realElement => {
+              b += 1;
               return (
-                <td key={i}>{element}</td>
+                <td key={b}>{realElement}</td>
               );
             })}
           </tr>
-          <tr>
-            <th>Title</th>
-            {title.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Category</th>
-            {category.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Author</th>
-            {author.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Page</th>
-            {page.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Date Published</th>
-            {datePublished.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Read</th>
-            {read.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element ? 'Yes' : 'No' }</td>
-              );
-            })}
-          </tr>
-        </tbody>
-      </table>
-    </>
+        )) : null}
+      </tbody>
+    </table>
   );
 };
 
