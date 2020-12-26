@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const initialState = {
   category: ['Sci_Fi', 'History'],
   title: ['The Devils of the Paradise', 'The History of Civilization'],
@@ -33,16 +34,21 @@ const booksReducer = (state = initialState, action) => {
       const {
         id, title, author, category, page, datePublished, read,
       } = action.payload;
-      const removeKey = (element, array) => array.filter(ele => ele !== element);
+      const removeKey = (element, array, index) => array.filter(ele => {
+        console.log(`Element is ${element}, index is ${array.indexOf(element)}, given index is ${index}`);
+
+        return array.indexOf(ele) !== index;
+      });
+      console.log(state.category.indexOf(category));
       return {
         ...state,
-        BookID: removeKey(id, state.BookID),
-        category: removeKey(category, state.category),
-        title: removeKey(title, state.title),
-        author: removeKey(author, state.author),
-        page: removeKey(page, state.page),
-        datePublished: removeKey(datePublished, state.datePublished),
-        read: removeKey(read, state.read),
+        BookID: removeKey(id, state.BookID, state.BookID.indexOf(id)),
+        category: removeKey(category, state.category, state.category.indexOf(category)),
+        title: removeKey(title, state.title, state.title.indexOf(title)),
+        author: removeKey(author, state.author, state.author.indexOf(author)),
+        page: removeKey(page, state.page, state.page.indexOf(page)),
+        datePublished: removeKey(datePublished, state.datePublished, state.datePublished.indexOf(datePublished)),
+        read: removeKey(read, state.read, state.read.indexOf(read)),
       };
     }
     default:

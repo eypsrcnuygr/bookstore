@@ -11,6 +11,7 @@ const book = props => {
   const {
     BookID, title, category, author, page, datePublished, read,
   } = props.bookObj;
+  console.log(BookID);
   const bookArr = [];
   let i = 0;
   let b = 0;
