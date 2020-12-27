@@ -1,18 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { removeBook } from '../actions';
 import '../App.css';
 
-const mapDispatchToProps = dispatch => ({
-  remove: obj => dispatch(removeBook(obj)),
-});
-
 const book = props => {
-  const bookObjForBook = props.bookObj.bookObj.bookObj;
+  const bookObjForBook = props.bookObj.bookObj;
   let i = 0;
-  const handleClick = obj => {
-    props.remove(obj);
-  };
 
   return (
     <>
@@ -40,7 +31,7 @@ const book = props => {
                 }
                 return <td key={i}>{value}</td>;
               })}
-              <td><button onClick={() => handleClick(book)} type="button">Remove</button></td>
+              <td><button onClick={() => props.handleClick(book)} type="button">Remove</button></td>
             </tr>
           ))}
         </tbody>
@@ -49,4 +40,4 @@ const book = props => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(book);
+export default book;
