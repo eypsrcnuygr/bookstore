@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-prop-types */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -10,7 +12,7 @@ import CategoryFilter from '../components/categoryFilter';
 function mapStateToProps(state) {
   const bookObjForForm = state.booksReducer;
   const selectedFilter = state.filterReducer.selectedCategory;
-  console.log(selectedFilter);
+
   return {
     bookObjForForm,
     selectedFilter,
@@ -19,7 +21,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   create: obj => dispatch(createBook(obj)),
-  filter: selectedFilter => dispatch(filterBooks(selectedFilter)),
+  filter: (selectedFilter, bookObj) => dispatch(filterBooks(selectedFilter, bookObj)),
 });
 
 class BooksForm extends Component {
@@ -60,9 +62,11 @@ class BooksForm extends Component {
   }
 
   handleFilter(e) {
-    this.setState({
-      filter: e.target.value,
-    });
+    const { filter } = this.props;
+    this.setState(() => ({ filter: e.target.value }),
+      async () => {
+        await filter(this.state.filter, this.props.bookObjForForm.bookObj);
+      });
   }
 
   reset() {
@@ -100,9 +104,9 @@ class BooksForm extends Component {
           <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
           <input type="button" onClick={this.handleClick} value="Yapıştır" />
         </form>
-        <div onClick={this.handleFilter}>
-          <CategoryFilter />
-        </div>
+
+        <CategoryFilter handleFilter={this.handleFilter} />
+
       </>
 
     );
