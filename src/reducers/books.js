@@ -1,32 +1,43 @@
 const initialState = {
-  bookObj: {
-    category: ['Sci_Fi', 'History'],
-    title: ['The Devils of the Paradise', 'The History of Civilization'],
-    author: ['Carl Sagan', 'Will Durant'],
-    page: [380, 520],
-    datePublished: [1980, 1981],
-    read: [true, false],
-    BookID: [1, 2],
-  },
+  bookObj: [
+    {
+      category: 'Sci_Fi',
+      title: 'The Devils of the Paradise',
+      author: 'Carl Sagan',
+      page: 380,
+      datePublished: 1980,
+      read: true,
+      BookID: 1,
+    },
+    {
+      category: 'History',
+      title: 'The History of Civilization',
+      author: 'Will Durant',
+      page: 520,
+      datePublished: 1981,
+      read: false,
+      BookID: 2,
+    },
+  ],
 };
 
 const booksReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_BOOK': {
-      const { id, bookObj } = action.payload;
+      const { bookObj } = state;
+      bookObj.push(action.payload);
+
       return {
-        ...state,
-        BookID: state.BookID + id,
-        state: bookObj,
+        bookObj,
       };
     }
     case 'REMOVE_BOOK': {
-      const { id, bookObj } = action.payload;
-      const indexOfId = bookObj.BookID.indexOf(id);
+      const bookObjRemoved = action.payload;
+      const bookObj = { ...state }.bookObj
+        .filter(element => element.BookID !== bookObjRemoved.BookID);
+
       return {
-        ...state,
-        BookID: state.BookID.splice(indexOfId, 1),
-        state: bookObj,
+        bookObj,
       };
     }
     default:

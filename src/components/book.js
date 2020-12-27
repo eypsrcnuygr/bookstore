@@ -1,77 +1,39 @@
 import React from 'react';
+import '../App.css';
 
 const book = props => {
-  const {
-    BookID, title, category, author, page, datePublished, read,
-  } = props.bookObj;
+  const bookObjForBook = props.bookObj.bookObj;
   let i = 0;
+
   return (
     <>
       <table>
-        <tbody>
-          <tr>
-            <th>Book ID</th>
-            {BookID.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
-            <th>Title</th>
-            {title.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
+        <thead>
           <tr>
             <th>Category</th>
-            {category.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
+            <th>Title</th>
             <th>Author</th>
-            {author.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
             <th>Page</th>
-            {page.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
             <th>Date Published</th>
-            {datePublished.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element}</td>
-              );
-            })}
-          </tr>
-          <tr>
             <th>Read</th>
-            {read.map(element => {
-              i += 1;
-              return (
-                <td key={i}>{element ? 'Yes' : 'No' }</td>
-              );
-            })}
+            <th>Book ID</th>
           </tr>
+        </thead>
+        <tbody>
+          {bookObjForBook.map(book => (
+            <tr key={book.BookID}>
+              {Object.values(book).map(value => {
+                i += 1;
+                if (value === true) {
+                  return <td key={i}>Yes</td>;
+                } if (value === false) {
+                  return <td key={i}>No</td>;
+                }
+                return <td key={i}>{value}</td>;
+              })}
+              <td><button onClick={() => props.handleRemove(book)} type="button">Remove</button></td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>

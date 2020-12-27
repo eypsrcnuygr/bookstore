@@ -1,6 +1,6 @@
 # The-Bookstore
 
-This is the first project on Microverse React curriculum. It is an app for an  imaginary bookstore. 
+This is the second project on Microverse React curriculum. It is an app for an  imaginary bookstore. 
 
 
 ## Built With
