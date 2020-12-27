@@ -28,80 +28,17 @@ class BooksForm extends Component {
       BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
     };
 
-    this.handleChangeForTitle = this.handleChangeForTitle.bind(this);
-    this.handleChangeForCategory = this.handleChangeForCategory.bind(this);
-    this.handleChangeForAuthor = this.handleChangeForAuthor.bind(this);
-    this.handleChangeForDatePublished = this.handleChangeForDatePublished.bind(this);
-    this.handleChangeForPage = this.handleChangeForPage.bind(this);
-    this.handleChangeForRead = this.handleChangeForRead.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
   }
 
-  handleChangeForTitle(e) {
-    if (e.target.value === '') {
-      this.setState({
-        title: '',
-      });
-    } else {
-      this.setState({
-        title: e.target.value,
-      });
-    }
-  }
-
-  handleChangeForCategory(e) {
-    this.setState({
-      category: e.target.value,
-    });
-  }
-
-  handleChangeForAuthor(e) {
-    if (e.target.value === '') {
-      this.setState({
-        author: '',
-      });
-    } else {
-      this.setState({
-        author: e.target.value,
-      });
-    }
-  }
-
-  handleChangeForPage(e) {
-    if (e.target.value === '') {
-      this.setState({
-        page: '',
-      });
-    } else {
-      this.setState({
-        page: e.target.value,
-      });
-    }
-  }
-
-  handleChangeForDatePublished(e) {
-    if (e.target.value === '') {
-      this.setState({
-        datePublished: '',
-      });
-    } else {
-      this.setState({
-        datePublished: e.target.value,
-      });
-    }
-  }
-
-  handleChangeForRead(e) {
-    if (e.target.checked) {
-      this.setState({
-        read: true,
-      });
-    } else {
-      this.setState({
-        read: false,
-      });
-    }
+  handleChange(evt) {
+    const value = evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
+    this.setState(state => ({
+      ...state,
+      [evt.target.name]: value,
+    }));
   }
 
   handleClick() {
@@ -135,14 +72,14 @@ class BooksForm extends Component {
     }
     return (
       <form>
-        <input type="text" onChange={this.handleChangeForTitle} value={title} />
-        <select name="categories" value={category} id="categories" onChange={this.handleChangeForCategory}>
+        <input type="text" onChange={this.handleChange} value={title} name="title" />
+        <select name="category" value={category} id="categories" onChange={this.handleChange}>
           {option}
         </select>
-        <input type="text" onChange={this.handleChangeForAuthor} value={author} />
-        <input type="number" onChange={this.handleChangeForPage} value={page} />
-        <input type="date" onChange={this.handleChangeForDatePublished} value={datePublished} />
-        <input type="checkbox" onClick={this.handleChangeForRead} value={read} />
+        <input type="text" onChange={this.handleChange} value={author} name="author" />
+        <input type="number" onChange={this.handleChange} value={page} name="page" />
+        <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
+        <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
         <input type="button" onClick={this.handleClick} value="Yapıştır" />
       </form>
     );
