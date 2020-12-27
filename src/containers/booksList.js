@@ -19,11 +19,11 @@ const mapDispatchToProps = dispatch => ({
 const BookList = props => {
   const { bookObj } = props;
 
-  const handleClick = obj => {
+  const handleRemove = obj => {
     props.remove(obj);
   };
   return (
-    <Book bookObj={bookObj} handleClick={handleClick} />
+    <Book bookObj={bookObj} handleRemove={handleRemove} />
   );
 };
 BookList.propTypes = {

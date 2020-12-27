@@ -31,7 +31,7 @@ const book = props => {
                 }
                 return <td key={i}>{value}</td>;
               })}
-              <td><button onClick={() => props.handleClick(book)} type="button">Remove</button></td>
+              <td><button onClick={() => props.handleRemove(book)} type="button">Remove</button></td>
             </tr>
           ))}
         </tbody>
