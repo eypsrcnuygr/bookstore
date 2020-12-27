@@ -1,18 +1,25 @@
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createBook } from '../actions';
+import { createBook, filterBooks } from '../actions';
+import CategoryFilter from '../components/categoryFilter';
 
 function mapStateToProps(state) {
   const bookObjForForm = state.booksReducer;
-
+  const selectedFilter = state.filterReducer.selectedCategory;
+  console.log(selectedFilter);
   return {
     bookObjForForm,
+    selectedFilter,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   create: obj => dispatch(createBook(obj)),
+  filter: selectedFilter => dispatch(filterBooks(selectedFilter)),
 });
 
 class BooksForm extends Component {
@@ -26,11 +33,13 @@ class BooksForm extends Component {
       datePublished: '',
       read: false,
       BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
+      filter: 'All',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
   }
 
   handleChange(evt) {
@@ -50,7 +59,14 @@ class BooksForm extends Component {
       });
   }
 
+  handleFilter(e) {
+    this.setState({
+      filter: e.target.value,
+    });
+  }
+
   reset() {
+    const { selectedFilter } = this.props;
     this.setState(state => ({
       title: '',
       author: '',
@@ -58,6 +74,7 @@ class BooksForm extends Component {
       datePublished: '',
       category: 'Action',
       read: state.read,
+      filter: selectedFilter,
     }));
   }
 
@@ -71,35 +88,37 @@ class BooksForm extends Component {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
     }
     return (
-      <form>
-        <input type="text" onChange={this.handleChange} value={title} name="title" />
-        <select name="category" value={category} id="categories" onChange={this.handleChange}>
-          {option}
-        </select>
-        <input type="text" onChange={this.handleChange} value={author} name="author" />
-        <input type="number" onChange={this.handleChange} value={page} name="page" />
-        <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
-        <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
-        <input type="button" onClick={this.handleClick} value="Yapıştır" />
-      </form>
+      <>
+        <form>
+          <input type="text" onChange={this.handleChange} value={title} name="title" />
+          <select name="category" value={category} id="categories" onChange={this.handleChange}>
+            {option}
+          </select>
+          <input type="text" onChange={this.handleChange} value={author} name="author" />
+          <input type="number" onChange={this.handleChange} value={page} name="page" />
+          <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
+          <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
+          <input type="button" onClick={this.handleClick} value="Yapıştır" />
+        </form>
+        <div onClick={this.handleFilter}>
+          <CategoryFilter />
+        </div>
+      </>
+
     );
   }
 }
 
 BooksForm.propTypes = {
-  bookObjForForm: PropTypes.instanceOf(Array),
-};
-
-BooksForm.propTypes = {
+  bookObjForForm: PropTypes.instanceOf(Object),
+  selectedFilter: PropTypes.string,
   create: PropTypes.instanceOf(Object),
 };
 
 BooksForm.defaultProps = {
   bookObjForForm: [],
-};
-
-BooksForm.defaultProps = {
   create: {},
+  selectedFilter: 'All',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);

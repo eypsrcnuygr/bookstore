@@ -8,6 +8,7 @@ const initialState = {
       datePublished: 1980,
       read: true,
       BookID: 1,
+      filter: 'All',
     },
     {
       category: 'History',
@@ -17,6 +18,7 @@ const initialState = {
       datePublished: 1981,
       read: false,
       BookID: 2,
+      filter: 'All',
     },
   ],
 };

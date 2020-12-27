@@ -6,9 +6,11 @@ import Book from '../components/book';
 
 const mapStateToProps = state => {
   const bookObj = state.booksReducer;
+  const selectedFilter = state.filterReducer.selectedCategory;
 
   return {
     bookObj,
+    selectedFilter,
   };
 };
 
@@ -17,17 +19,18 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const BookList = props => {
-  const { bookObj } = props;
+  const { bookObj, selectedFilter } = props;
 
   const handleRemove = obj => {
     props.remove(obj);
   };
   return (
-    <Book bookObj={bookObj} handleRemove={handleRemove} />
+    <Book bookObj={bookObj} handleRemove={handleRemove} selectedFilter={selectedFilter} />
   );
 };
 BookList.propTypes = {
   bookObj: PropTypes.instanceOf(Object),
+  selectedFilter: PropTypes.string,
 };
 
 BookList.propTypes = {
@@ -36,6 +39,7 @@ BookList.propTypes = {
 
 BookList.defaultProps = {
   bookObj: {},
+  selectedFilter: undefined,
 };
 
 BookList.defaultProps = {

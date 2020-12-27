@@ -8,14 +8,14 @@ import { filterBooks } from '../actions/index';
 
 const mapStateToProps = state => {
   const bookObj = state.booksReducer;
-
+  console.log(bookObj);
   return {
     bookObj,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
-  filterBooks: (obj, selectedCategory) => dispatch(filterBooks(obj, selectedCategory)),
+  filterBooks: (selectedCategory, obj) => dispatch(filterBooks(selectedCategory, obj)),
 });
 
 const CategoryFilter = props => {
@@ -27,14 +27,14 @@ const CategoryFilter = props => {
     setSelectedCategoryState(e.target.value);
   };
 
-  const filterOne = selectedCategory => {
-    props.filterBooks(selectedCategory);
+  const filterOne = (selectedCategory, bookObj) => {
+    props.filterBooks(selectedCategory, bookObj);
   };
-
+  console.log(props.bookObj.bookObj[0]);
   return (
     <>
       <div><h1>Select a Filter</h1></div>
-      <select type="checkbox" onChange={onClickToCheckbox} onClick={() => filterOne(selectedCategoryState)}>
+      <select type="checkbox" onChange={onClickToCheckbox} onClick={() => filterOne(selectedCategoryState, props.bookObj.bookObj[0])}>
         {categories.map(category => {
           i += 1;
           return (
