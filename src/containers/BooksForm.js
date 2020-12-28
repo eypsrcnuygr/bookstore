@@ -22,9 +22,7 @@ class BooksForm extends Component {
       category: 'Action',
       title: '',
       author: '',
-      page: '',
-      datePublished: '',
-      read: false,
+      read: 0,
       BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
     };
 
@@ -51,13 +49,11 @@ class BooksForm extends Component {
   }
 
   reset() {
-    this.setState(state => ({
+    this.setState(() => ({
       title: '',
       author: '',
-      page: '',
-      datePublished: '',
       category: 'Action',
-      read: state.read,
+      read: 0,
     }));
   }
 
@@ -66,7 +62,7 @@ class BooksForm extends Component {
     const option = [];
 
     const {
-      title, author, page, datePublished, read, category,
+      title, author, read, category,
     } = this.state;
     for (let i = 0; i < 7; i += 1) {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
@@ -80,9 +76,7 @@ class BooksForm extends Component {
             {option}
           </select>
           <input type="text" onChange={this.handleChange} value={author} name="author" />
-          <input type="number" onChange={this.handleChange} value={page} name="page" />
-          <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
-          <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
+          <input type="number" onChange={this.handleChange} value={read} name="read" />
           <input type="button" onClick={this.handleClick} value="Submit" />
         </form>
       </>

@@ -1,3 +1,24 @@
 body {
   background-color: white;
+  margin: 0 10%;
+  background-color: #f5f6fa;
+}
+
+nav {
+  margin-top: 5%;
+  background-color: white;
+  padding: 2% 4%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  margin-right: 75px;
+}
+
+#CMS {
+  color: #0290ff;
+  font-weight: 900;
+  font-size: 1.6rem;
 }

@@ -14,8 +14,6 @@ const book = props => {
             <th>Category</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Page</th>
-            <th>Date Published</th>
             <th>Read</th>
             <th>Book ID</th>
           </tr>
