@@ -32,18 +32,12 @@ const BookList = props => {
 BookList.propTypes = {
   bookObj: PropTypes.instanceOf(Object),
   selectedFilter: PropTypes.string,
-};
-
-BookList.propTypes = {
   remove: PropTypes.instanceOf(Object),
 };
 
 BookList.defaultProps = {
   bookObj: {},
   selectedFilter: undefined,
-};
-
-BookList.defaultProps = {
   remove: {},
 };
 

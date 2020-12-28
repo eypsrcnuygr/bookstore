@@ -1,9 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,22 +6,21 @@ import CategoryFilter from '../components/categoryFilter';
 
 function mapStateToProps(state) {
   const bookObjForForm = state.booksReducer;
-  const selectedFilter = state.filterReducer.selectedCategory;
 
   return {
     bookObjForForm,
-    selectedFilter,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
   create: obj => dispatch(createBook(obj)),
-  filter: (selectedFilter, bookObj) => dispatch(filterBooks(selectedFilter, bookObj)),
+  filter: selectedFilter => dispatch(filterBooks(selectedFilter)),
 });
 
 const setFilter = (obj = 'All', e) => {
-  obj = e.target.value;
-  return obj;
+  let obj2 = obj;
+  obj2 = e.target.value;
+  return obj2;
 };
 
 class BooksForm extends Component {
@@ -67,8 +60,10 @@ class BooksForm extends Component {
   }
 
   handleFilter(e) {
+    const { bookObjForForm } = this.props;
+    const newShape = bookObjForForm.bookObj;
     const { filter } = this.props;
-    filter(setFilter(this.props.bookObjForForm.bookObj, e), this.props.bookObjForForm.bookObj);
+    filter(setFilter(newShape, e), newShape);
   }
 
   reset() {
@@ -116,14 +111,14 @@ class BooksForm extends Component {
 
 BooksForm.propTypes = {
   bookObjForForm: PropTypes.instanceOf(Object),
-  selectedFilter: PropTypes.string,
   create: PropTypes.instanceOf(Object),
+  filter: PropTypes.func,
 };
 
 BooksForm.defaultProps = {
   bookObjForForm: [],
   create: {},
-  selectedFilter: 'All',
+  filter: 'All',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);

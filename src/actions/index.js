@@ -12,10 +12,9 @@ export const removeBook = bookObj => ({
   },
 });
 
-export const filterBooks = (selectedCategory, bookObj) => ({
+export const filterBooks = selectedCategory => ({
   type: 'CHANGE_FILTER',
   payload: {
     selectedCategory,
-    bookObj,
   },
 });
