@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createBook, filterBooks } from '../actions';
-import CategoryFilter from '../components/categoryFilter';
+import { createBook } from '../actions';
 
 function mapStateToProps(state) {
   const bookObjForForm = state.booksReducer;
@@ -14,14 +13,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => ({
   create: obj => dispatch(createBook(obj)),
-  filter: selectedFilter => dispatch(filterBooks(selectedFilter)),
 });
-
-const setFilter = (obj = 'All', e) => {
-  let obj2 = obj;
-  obj2 = e.target.value;
-  return obj2;
-};
 
 class BooksForm extends Component {
   constructor(props) {
@@ -39,7 +31,6 @@ class BooksForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.reset = this.reset.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
   }
 
   handleChange(evt) {
@@ -57,13 +48,6 @@ class BooksForm extends Component {
         await create(this.state);
         this.reset();
       });
-  }
-
-  handleFilter(e) {
-    const { bookObjForForm } = this.props;
-    const newShape = bookObjForForm.bookObj;
-    const { filter } = this.props;
-    filter(setFilter(newShape, e), newShape);
   }
 
   reset() {
@@ -89,6 +73,7 @@ class BooksForm extends Component {
     }
     return (
       <>
+        <h2>The Book Form to add Books</h2>
         <form>
           <input type="text" onChange={this.handleChange} value={title} name="title" />
           <select name="category" value={category} id="categories" onChange={this.handleChange}>
@@ -100,9 +85,6 @@ class BooksForm extends Component {
           <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
           <input type="button" onClick={this.handleClick} value="Yapıştır" />
         </form>
-
-        <CategoryFilter handleFilter={this.handleFilter} />
-
       </>
 
     );
@@ -112,13 +94,11 @@ class BooksForm extends Component {
 BooksForm.propTypes = {
   bookObjForForm: PropTypes.instanceOf(Object),
   create: PropTypes.instanceOf(Object),
-  filter: PropTypes.func,
 };
 
 BooksForm.defaultProps = {
   bookObjForForm: [],
   create: {},
-  filter: 'All',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BooksForm);

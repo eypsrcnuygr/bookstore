@@ -8,7 +8,7 @@ const CategoryFilter = props => {
 
   return (
     <>
-      <div><h1>Select a Filter</h1></div>
+      <div><h2>Select a Filter</h2></div>
       <select type="checkbox" onClick={e => props.handleFilter(e)}>
         {categories.map(category => {
           i += 1;

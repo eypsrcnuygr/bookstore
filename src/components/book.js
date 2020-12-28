@@ -7,6 +7,7 @@ const book = props => {
 
   return (
     <>
+      <h2>The book List</h2>
       <table>
         <thead>
           <tr>
