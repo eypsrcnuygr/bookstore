@@ -2,6 +2,7 @@
 
 This is the second project on Microverse React curriculum. It is an app for an  imaginary bookstore. 
 
+![screenshot](./public/screenshot.png)<br>
 
 ## Built With
 
