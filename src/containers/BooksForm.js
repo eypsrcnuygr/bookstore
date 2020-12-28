@@ -83,7 +83,7 @@ class BooksForm extends Component {
           <input type="number" onChange={this.handleChange} value={page} name="page" />
           <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
           <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
-          <input type="button" onClick={this.handleClick} value="Yapıştır" />
+          <input type="button" onClick={this.handleClick} value="Submit" />
         </form>
       </>
 
