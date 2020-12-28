@@ -7,6 +7,7 @@ const book = props => {
 
   return (
     <>
+      <h2>The book List</h2>
       <table>
         <thead>
           <tr>
@@ -20,7 +21,7 @@ const book = props => {
           </tr>
         </thead>
         <tbody>
-          {bookObjForBook.map(book => (
+          {bookObjForBook.filter(element => (!props.selectedFilter || props.selectedFilter === 'All' ? element : element.category === props.selectedFilter)).map(book => (
             <tr key={book.BookID}>
               {Object.values(book).map(value => {
                 i += 1;

@@ -1,7 +1,7 @@
 const initialState = {
   bookObj: [
     {
-      category: 'Sci_Fi',
+      category: 'Sci-Fi',
       title: 'The Devils of the Paradise',
       author: 'Carl Sagan',
       page: 380,

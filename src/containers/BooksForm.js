@@ -64,6 +64,7 @@ class BooksForm extends Component {
   render() {
     const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
     const option = [];
+
     const {
       title, author, page, datePublished, read, category,
     } = this.state;
@@ -71,34 +72,32 @@ class BooksForm extends Component {
       option.push(<option key={i} value={categories[i]}>{categories[i]}</option>);
     }
     return (
-      <form>
-        <input type="text" onChange={this.handleChange} value={title} name="title" />
-        <select name="category" value={category} id="categories" onChange={this.handleChange}>
-          {option}
-        </select>
-        <input type="text" onChange={this.handleChange} value={author} name="author" />
-        <input type="number" onChange={this.handleChange} value={page} name="page" />
-        <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
-        <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
-        <input type="button" onClick={this.handleClick} value="Yapıştır" />
-      </form>
+      <>
+        <h2>The Book Form to add Books</h2>
+        <form>
+          <input type="text" onChange={this.handleChange} value={title} name="title" />
+          <select name="category" value={category} id="categories" onChange={this.handleChange}>
+            {option}
+          </select>
+          <input type="text" onChange={this.handleChange} value={author} name="author" />
+          <input type="number" onChange={this.handleChange} value={page} name="page" />
+          <input type="date" onChange={this.handleChange} value={datePublished} name="datePublished" />
+          <input type="checkbox" onClick={this.handleChange} value={read} name="read" />
+          <input type="button" onClick={this.handleClick} value="Submit" />
+        </form>
+      </>
+
     );
   }
 }
 
 BooksForm.propTypes = {
-  bookObjForForm: PropTypes.instanceOf(Array),
-};
-
-BooksForm.propTypes = {
+  bookObjForForm: PropTypes.instanceOf(Object),
   create: PropTypes.instanceOf(Object),
 };
 
 BooksForm.defaultProps = {
   bookObjForForm: [],
-};
-
-BooksForm.defaultProps = {
   create: {},
 };
 
