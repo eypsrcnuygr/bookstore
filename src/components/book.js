@@ -38,7 +38,7 @@ const book = props => {
               <div className="chapter">
                 <h4>Current Chapter</h4>
                 <p>Chapter XXX</p>
-                <button type="button" id="update-button">UPDATE PROGRESS</button>
+                <button type="button" className="update-button">UPDATE PROGRESS</button>
               </div>
             </div>
           </div>

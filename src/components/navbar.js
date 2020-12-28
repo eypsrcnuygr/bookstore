@@ -9,7 +9,7 @@ const navBar = () => (
       <a href="https://medium.com/@sercanuygur">Categories</a>
       <button className="btn" type="button">
         Sercan
-        <i className="fa fa-home" />
+        <i className="fa fa-home blue" />
       </button>
     </nav>
   </>

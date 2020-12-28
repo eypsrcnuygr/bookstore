@@ -1,7 +1,11 @@
 body {
-  background-color: white;
   margin: 0 0;
   background-color: #f5f6fa;
+}
+
+.App {
+  background-color: #fafafa;
+  margin-bottom: 50px;
 }
 
 #root {
@@ -28,13 +32,15 @@ a {
   font-size: 1.6rem;
 }
 
-.flex, #book-list-heading {
+.flex,
+#book-list-heading {
   display: flex;
   padding: 2% 4%;
 }
 
-.add-book, .filter {
-  padding: 2% 4%;
+.add-book,
+.filter {
+  padding: 2% 0% 2% 15%;
 }
 
 .btn {
@@ -61,7 +67,7 @@ a {
 }
 
 #book-category {
-  color:#888888;
+  color: #888;
 }
 
 .book-container {
@@ -94,7 +100,7 @@ h4 {
   font-weight: 400;
 }
 
-#update-button {
+.update-button {
   border: none;
   background-color: #0290ff;
   padding-top: 6px;
@@ -103,4 +109,37 @@ h4 {
   padding-left: 6px;
   border-radius: 2px;
   color: white;
+}
+
+#add-new-book {
+  color: #888;
+}
+
+input,
+select {
+  height: 30px;
+  border: none;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+#title-input {
+  width: 59%;
+}
+
+#selec-filter-heading {
+  width: 80%;
+  margin-right: auto;
+  text-align: center;
+}
+
+.inner-filter {
+  border-top: 1px solid gray;
+  margin-right: auto;
+  width: 80%;
+  text-align: center;
+}
+
+#selec-filter-heading h2 {
+  padding-left: 24%;
 }

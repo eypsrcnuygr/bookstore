@@ -70,15 +70,15 @@ class BooksForm extends Component {
     return (
       <>
         <div className="add-book">
-          <h2>Add New Book</h2>
+          <h2 id="add-new-book">Add New Book</h2>
           <form>
-            <input type="text" onChange={this.handleChange} value={title} name="title" />
+            <input type="text" onChange={this.handleChange} value={title} name="title" id="title-input" placeholder="Book Title" />
             <select name="category" value={category} id="categories" onChange={this.handleChange}>
               {option}
             </select>
-            <input type="text" onChange={this.handleChange} value={author} name="author" />
+            <input type="text" onChange={this.handleChange} value={author} name="author" placeholder="Author" />
             <input type="number" onChange={this.handleChange} value={read} name="read" />
-            <input type="button" onClick={this.handleClick} value="ADD BOOK" />
+            <input type="button" onClick={this.handleClick} value="ADD BOOK" className="update-button" />
           </form>
         </div>
 

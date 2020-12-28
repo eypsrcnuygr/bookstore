@@ -9,15 +9,18 @@ const CategoryFilter = props => {
   return (
     <>
       <div className="filter">
-        <div><h2>Select a Filter</h2></div>
-        <select type="checkbox" onClick={e => props.handleFilter(e)}>
-          {categories.map(category => {
-            i += 1;
-            return (
-              <option key={i} value={category}>{category}</option>
-            );
-          })}
-        </select>
+        <div className="inner-filter">
+          <div id="selec-filter-heading"><h2>Select a Filter</h2></div>
+          <select type="checkbox" onClick={e => props.handleFilter(e)} className="select-filter">
+            {categories.map(category => {
+              i += 1;
+              return (
+                <option key={i} value={category}>{category}</option>
+              );
+            })}
+          </select>
+        </div>
+
       </div>
 
     </>
