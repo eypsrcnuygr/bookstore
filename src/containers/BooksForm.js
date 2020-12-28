@@ -69,16 +69,19 @@ class BooksForm extends Component {
     }
     return (
       <>
-        <h2>The Book Form to add Books</h2>
-        <form>
-          <input type="text" onChange={this.handleChange} value={title} name="title" />
-          <select name="category" value={category} id="categories" onChange={this.handleChange}>
-            {option}
-          </select>
-          <input type="text" onChange={this.handleChange} value={author} name="author" />
-          <input type="number" onChange={this.handleChange} value={read} name="read" />
-          <input type="button" onClick={this.handleClick} value="Submit" />
-        </form>
+        <div className="add-book">
+          <h2>Add New Book</h2>
+          <form>
+            <input type="text" onChange={this.handleChange} value={title} name="title" />
+            <select name="category" value={category} id="categories" onChange={this.handleChange}>
+              {option}
+            </select>
+            <input type="text" onChange={this.handleChange} value={author} name="author" />
+            <input type="number" onChange={this.handleChange} value={read} name="read" />
+            <input type="button" onClick={this.handleClick} value="ADD BOOK" />
+          </form>
+        </div>
+
       </>
 
     );

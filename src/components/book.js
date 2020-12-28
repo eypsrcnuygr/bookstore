@@ -7,36 +7,41 @@ const book = props => {
 
   return (
     <>
-      <h2>The book List</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Read</th>
-            <th>Book ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          {bookObjForBook.filter(element => (!props.selectedFilter || props.selectedFilter === 'All' ? element : element.category === props.selectedFilter)).map(book => (
-            <tr key={book.BookID}>
-              {Object.values(book).map(value => {
-                i += 1;
-                if (value === true) {
-                  return <td key={i}>Yes</td>;
-                } if (value === false) {
-                  return <td key={i}>No</td>;
-                }
-                return <td key={i}>{value}</td>;
-              })}
-              <td><button onClick={() => props.handleRemove(book)} type="button">Remove</button></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <h2 id="book-list-heading">The book List</h2>
+
+      {bookObjForBook.filter(element => (!props.selectedFilter || props.selectedFilter === 'All' ? element : element.category === props.selectedFilter)).map(book => {
+        i += 1;
+        return (
+          <div key={i} className="flex">
+            <div>
+              <div>{book.category}</div>
+              <div>{book.title}</div>
+              <div>{book.author}</div>
+              <div>
+                <button type="button">Comment</button>
+                <button onClick={() => props.handleRemove(book)} type="button">Remove</button>
+                <button type="button">Edit</button>
+              </div>
+            </div>
+            <div>
+              Placeholder for status bar
+            </div>
+            <div>
+              {book.read}
+              <div>
+                Completed
+              </div>
+            </div>
+            <div>
+              <h4>Current Chapter</h4>
+              <p>Chapter XXX</p>
+              <button type="button">UPDATE PROGRESS</button>
+            </div>
+          </div>
+        );
+      })}
+
     </>
   );
 };
-
 export default book;
