@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unused-prop-types */
@@ -24,6 +25,11 @@ const mapDispatchToProps = dispatch => ({
   filter: (selectedFilter, bookObj) => dispatch(filterBooks(selectedFilter, bookObj)),
 });
 
+const setFilter = (obj = 'All', e) => {
+  obj = e.target.value;
+  return obj;
+};
+
 class BooksForm extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +41,6 @@ class BooksForm extends Component {
       datePublished: '',
       read: false,
       BookID: props.bookObjForForm.bookObj[props.bookObjForForm.bookObj.length - 1].BookID,
-      filter: 'All',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -63,14 +68,10 @@ class BooksForm extends Component {
 
   handleFilter(e) {
     const { filter } = this.props;
-    this.setState(() => ({ filter: e.target.value }),
-      async () => {
-        await filter(this.state.filter, this.props.bookObjForForm.bookObj);
-      });
+    filter(setFilter(this.props.bookObjForForm.bookObj, e), this.props.bookObjForForm.bookObj);
   }
 
   reset() {
-    const { selectedFilter } = this.props;
     this.setState(state => ({
       title: '',
       author: '',
@@ -78,13 +79,13 @@ class BooksForm extends Component {
       datePublished: '',
       category: 'Action',
       read: state.read,
-      filter: selectedFilter,
     }));
   }
 
   render() {
     const categories = ['Action', 'Biography', 'History', 'Horror', 'Kids', 'Learning', 'Sci-Fi'];
     const option = [];
+
     const {
       title, author, page, datePublished, read, category,
     } = this.state;
