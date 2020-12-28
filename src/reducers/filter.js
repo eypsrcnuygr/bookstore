@@ -4,7 +4,7 @@ const filterReducer = (filterState = 'All', action) => {
 
   if (action.payload) {
     selectedCategory = action.payload.selectedCategory;
-    bookObj = action.payload.bookObj;
+    bookObj = { ...action.payload.bookObj };
   } else {
     selectedCategory = filterState;
   }

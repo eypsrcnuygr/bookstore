@@ -24,6 +24,7 @@ const BookList = props => {
   const handleRemove = obj => {
     props.remove(obj);
   };
+
   return (
     <Book bookObj={bookObj} handleRemove={handleRemove} selectedFilter={selectedFilter} />
   );

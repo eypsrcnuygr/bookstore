@@ -1,14 +1,13 @@
 const initialState = {
   bookObj: [
     {
-      category: 'Sci_Fi',
+      category: 'Sci-Fi',
       title: 'The Devils of the Paradise',
       author: 'Carl Sagan',
       page: 380,
       datePublished: 1980,
       read: true,
       BookID: 1,
-      filter: 'All',
     },
     {
       category: 'History',
@@ -18,7 +17,6 @@ const initialState = {
       datePublished: 1981,
       read: false,
       BookID: 2,
-      filter: 'All',
     },
   ],
 };
